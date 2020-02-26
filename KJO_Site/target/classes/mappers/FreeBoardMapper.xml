@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.KJO.mapper.FreeBoardMapper">
+	<insert id="FreeBoardWrite">
+		insert into FreeBoard(boardCategory, writerNum, writerName, boardSubject, boardContent, boardWriteDate, boardUpdateDate)
+		values
+		(#{boardCategory}, #{writerNum}, (select UserName from UserInfo where UserNum=#{writerNum}),
+		#{boardSubject}, #{boardContent}, sysdate(), sysdate());
+	</insert>
+	
+	<select id="FreeBoardList" resultType="com.KJO.model.FreeBoardVO">
+		select * from FreeBoard order by boardNum desc;
+	</select>
+	
+	<select id="FreeBoardCount" resultType="int">
+		select count(*) from FreeBoard
+			<choose>
+				<when test="searchOption.equals('searchSubject')">
+					<if test="keyword!=null">
+			    	where boardSubject like concat('%',#{keyword},'%')
+			    	</if>
+				</when>
+				<when test="searchOption.equals('searchContent')">
+					<if test="keyword!=null">
+			    	where boardContent like concat('%',#{keyword},'%')
+			    	</if>
+				</when>
+				<when test="searchOption.equals('searchSubCon')">
+					<if test="keyword!=null">
+			    	where boardSubject like concat('%',#{keyword},'%') or boardContent like concat('%',#{keyword},'%')
+			    	</if>
+				</when>
+				<when test="searchOption.equals('searchWriter')">
+					<if test="keyword!=null">
+			    	where writerName = #{keyword}
+			    	</if>
+				</when>
+				<otherwise>
+					<if test="keyword!=null">
+				    where boardSubject like concat('%',#{keyword},'%')
+				    </if>
+				</otherwise>
+			</choose>
+	</select>
+	
+  	<select id="ListPaging" resultType="com.KJO.model.FreeBoardVO">
+		select @bnum:=boardNum as boardNum, boardCategory, writerName, boardSubject, boardWriteDate, boardReadCnt,
+			(select count(*) from FreeBoardReply where boardNum=@bnum) as replyCount
+		from (
+			select @rownum:=@rownum+1 as rownum, boardNum, boardCategory, writerName, boardSubject, boardWriteDate, boardReadCnt
+			from (select @rownum:=0) as rownum, Freeboard
+			<choose>
+				<when test="searchOption.equals('searchSubject')">
+					<if test="keyword!=null">
+			    	where boardSubject like concat('%',#{keyword},'%')
+			    	</if>
+				</when>
+				<when test="searchOption.equals('searchContent')">
+					<if test="keyword!=null">
+			    	where boardContent like concat('%',#{keyword},'%')
+			    	</if>
+				</when>
+				<when test="searchOption.equals('searchSubCon')">
+					<if test="keyword!=null">
+			    	where boardSubject like concat('%',#{keyword},'%') or boardContent like concat('%',#{keyword},'%')
+			    	</if>
+				</when>
+				<when test="searchOption.equals('searchWriter')">
+					<if test="keyword!=null">
+			    	where writerName = #{keyword}
+			    	</if>
+				</when>
+				<otherwise>
+					<if test="keyword!=null">
+				    where boardSubject like concat('%',#{keyword},'%')
+				    </if>
+				</otherwise>
+			</choose>
+		    order by boardNum desc
+		) FreeBoard
+		<![CDATA[
+		where rownum > (#{pageNum}-1)*#{amount} and rownum <= #{pageNum}*#{amount};
+		]]>
+	</select>
+	
+	<select id="FreeBoardDetail" resultType="com.KJO.model.FreeBoardVO">
+		select * from FreeBoard where boardNum=#{bnum};
+	</select>
+	
+	<update id="FreeBoardCntUp">
+		update FreeBoard set boardReadCnt = boardReadCnt+1 where boardNum = #{bnum};
+	</update>
+	
+	<update id="FreeBoardUpdate">
+		update FreeBoard set boardSubject=#{boardSubject}, boardContent=#{boardContent}, boardUpdateDate=sysdate() where boardNum=#{boardNum};	
+	</update>
+	
+	<delete id="FreeBoardDelete">
+		delete from Freeboard where boardNum=#{bnum};
+	</delete>
+	
+	<select id="FreeBoardReplyList" resultType="com.KJO.model.FreeBoardReplyVO">
+		select * from FreeBoardReply where boardNum=#{bnum};
+	</select>
+	
+	<insert id="FreeBoardReplyWrite">
+		insert into FreeBoardReply(boardNum, replyerNum, replyerName, replyText, replyWriteDate, replyUpdateDate)
+		values (#{boardNum}, #{replyerNum}, (select userName from UserInfo where userNum=#{replyerNum}), #{replyText}, sysdate(), sysdate());	
+	</insert>
+	
+	<delete id="FreeBoardDeleteReply">
+		delete from FreeBoardReply where replyNum=#{rnum}
+	</delete>
+	
+	<select id="FreeBoardReplyCount">
+		select count(*) from FreeBoardReply where boardNum = #{boardNum};
+	</select>
+</mapper>

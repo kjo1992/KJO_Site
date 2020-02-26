@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.KJO.mapper.UserMapper">
+	<insert id="MemberAdd">
+		insert into UserInfo(userNum, userId, userPw, userName, userEmail, pwSearchQuestion, pwSearchAnswer, userRegDate)
+		values(replace(UUID(),'-',''), #{userId},#{userPw}, #{userName}, #{userEmail},#{pwSearchQuestion} , #{pwSearchAnswer}, sysdate());
+	</insert>
+
+	<select id="Login" resultType="com.KJO.model.LoginVO">
+		select userNum, userName, authority, profileImg
+		from UserInfo
+		where userId=#{userId} and userPw=#{userPw};
+	</select>
+
+	<select id="IDChk" resultType="int">
+		select count(*) from UserInfo where userId=#{ChkValue};
+	</select>
+	
+	<select id="NameChk" resultType="int">
+		select count(*) from UserInfo where userName=#{ChkValue};
+	</select>
+	
+	<select id="EmailChk" resultType="int">
+		select count(*) from UserInfo where userEmail=#{ChkValue};
+	</select>
+	
+	<update id="LastLoginDate">
+		update UserInfo set lastLoginDate=sysdate() where userId=#{userId} 	
+	</update>
+</mapper>

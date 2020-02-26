@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.KJO.mapper.ProductMapper">
+	<!-- 상품전체목록 타입 가져오기 -->
+	<select id="ProductTypeList" resultType="com.KJO.model.ProductBoardVO">
+		select *
+		from productType;
+	</select>
+	
+	<select id="ProductSpec" resultType="com.KJO.model.ProductSpecVO">
+		select *
+		from productSpec_CPU;
+	</select>
+	
+	<!-- 해쉬맵 반환 테스트 -->
+	<select id="test" resultType="HashMap">
+		show columns from productSpec_vga;
+	</select>
+	
+	<!-- 상품 게시판 작성 -->
+	<insert id="productBoardInsert">
+		Insert into productBoard(productName, productPrice, typeNum, regDate)
+		values(
+		 #{productName}, #{productPrice}, #{typeNum}, sysdate()
+		);
+	</insert>
+	
+	<!-- 상품 게시판 상세 스펙 작성 -->
+	<insert id="productSpecInsert">
+		<choose>
+			<when test="typeNum.equals('COM100')">
+				INSERT INTO productSpec_CPU(productName, manufacturer, cpuType, generation, coreType, threadType, baseClock, boostClock, l2Cache, l3Cache, tdp, memoryType, memoryBus, memoryChannel, innerGPU, releaseDate)
+				<![CDATA[
+				VALUES (#{productName}, #{manufacturer}, #{cpuType}, #{generation}, #{coreType}, #{threadType}, #{baseClock}, #{boostClock}, #{l2Cache}, #{l3Cache}, #{tdp}, #{memoryType}, #{memoryBus}, #{memoryChannel}, #{innerGPU}, #{releaseDate});
+				]]>
+			</when>
+			<when test="typeNum.equals('COM101')">
+				INSERT INTO productSpec_VGA(productName, manufacturer, chipsetManufacturer, vgaSeries, baseClock, boostClock, processAmount, pciInterface, memoryType, memorySize, memoryBus, hdmiPort, dpPort, supportMonitorAmount, maxTDP, recommendTDP, powerPort, powerPhase, supportMultiVga, support4K, support5K)
+				<![CDATA[
+				VALUES (#{productName}, #{manufacturer}, #{chipsetManufacturer}, #{vgaSeries}, #{baseClock}, #{boostClock}, #{processAmount}, #{pciInterface}, #{memoryType}, #{memorySize}, #{memoryBus}, #{hdmiPort}, #{dpPort}, #{supportMonitorAmount}, #{maxTDP}, #{recommendTDP}, #{powerPort}, #{powerPhase}, #{supportMultiVga}, #{support4K}, #{support5K});
+				]]>
+				
+			</when>
+		</choose>
+	</insert>
+</mapper>
