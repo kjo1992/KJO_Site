@@ -39,7 +39,7 @@
 				<small id="" class="form-text text-muted">bmp, png, jpg, jpeg 만 가능, 개별 파일당 2mb 이하, 최대 4장까지</small>
 			</div>
 			<label class="mt-3">이미지 미리보기</label>
-			<div style="max-height:200px;" id="loadImg_wrap"></div>
+			<div class="card border-primary card-body" style="height:200px;" id="loadImg_wrap"></div>
 		</li>
 	  </div>
 	  <div id="inputData">
