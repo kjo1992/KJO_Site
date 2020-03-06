@@ -19,6 +19,7 @@ $(document).ready(function(){
 		
 		$("#inputData").load(actionPage);
 		$("li>input").val("");
+		inputClear();
 	});
 	
 	
@@ -59,7 +60,7 @@ $(document).ready(function(){
 					var maxSize = 2 * 1024 * 1024;
 					
 					//파일 형식 검사
-					if($.inArray(imgType, ['png','jpeg','jpg','bmp','gif']) == -1) {
+					if($.inArray(imgType, ['png','jpeg','jpg','bmp']) == -1) {
 						alert(imgName+" 가 형식에 맞지않은 파일입니다.");
 						inputClear();
 						complete=false;
@@ -82,7 +83,8 @@ $(document).ready(function(){
 			if(complete==true) {
 				for (var i = 0; i < files.length; i++) {
 					file = files[i];
-
+					var imgName = file.name;
+					
 		            inputImg = inputImg+" / "+(i+1)+"."+imgName;
 					$("#productImglabel").text(inputImg);
 //					view_files.push(file);
@@ -90,7 +92,7 @@ $(document).ready(function(){
 					var viewer = new FileReader();
 					viewer.onload = function(e) {
 						console.log(e);
-						var appendImg = "<img src='"+e.target.result+"' data-file='"+imgName+"' style='width:150px; height:150px;'>";
+						var appendImg = "<a class='card-link'><img src='"+e.target.result+"' data-file='"+imgName+"' style='width:150px; height:150px; display:inline; margin:0 auto;'></a>";
 						$("#loadImg_wrap").append(appendImg);
 					}
 					viewer.readAsDataURL(file);
@@ -105,68 +107,4 @@ $(document).ready(function(){
 		$("#loadImg_wrap").empty();
 		$("#productImglabel").text("등록된 이미지가 없습니다.");
 	}
-	
-	//파일 유효성 검사
-/*	$("#productImg").on("change", function(a){
-		console.log(a);
-		var fileInput = document.getElementById("productImg");
-		var files = fileInput.files;
-		var filesArray = Array.prototype.slice.call(files);
-		var file;
-		var inputImgName = "";
-		var view_files = [];
-		$("#productImg").val("");
-		$(".loadImg_wrap").empty();
-		
-		console.log(files);
-		alert(filesArray.length);
-		
-		//파일 갯수 검사
-		if(filesArray.length > 4) {
-			alert("파일 최대갯수는 4개까지 업로드 가능합니다.");
-			return
-		} else {
-			filesArray.forEach(function(imgObject, index){
-				file = imgObject;
-	            console.log(file);
-	            var imgName = file.name;
-	            var imgType = file.type.split("/").pop().toLowerCase();
-				var imgSize = file.size;
-				var maxSize = 2 * 1024 * 1024;
-				
-				//파일 형식 검사
-				if($.inArray(imgType, ['png','jpeg','jpg','bmp']) != -1) {
-					//파일 크기 검사
-					if(imgSize < maxSize) {
-						inputImgName = inputImgName+" / "+(index+1)+"."+imgName;
-						$("#productImglabel").text(inputImgName);
-						view_files.push(imgObject);
-						
-						var viewer = new FileReader();
-						viewer.onload = function(e) {
-							console.log(e);
-							var appendImg = "<img src='"+e.target.result+"' data-file='"+imgName+"' style='width:150px; height:150px;'>";
-							$(".loadImg_wrap").append(appendImg);
-						}
-//						viewer.readAsDataURL(imgObject);
-					} else {
-						alert(imgName+" 의 파일크기가 너무 큽니다.");
-						$("#productImg").val("");
-						$(".loadImg_wrap").empty();
-						$("#productImglabel").text("등록된 이미지가 없습니다.");
-						return
-					}
-				} else {
-					alert(imgName+" 가 형식에 맞지않은 파일입니다.");
-					$("#productImg").val("");
-					$(".loadImg_wrap").empty();
-					$("#productImglabel").text("등록된 이미지가 없습니다.");
-					return
-				}
-			});
-		}
-		
-
-		
-	});*/
 });

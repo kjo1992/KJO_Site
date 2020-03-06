@@ -153,7 +153,7 @@ public class MyPageController {
 		String fileType = upload.getContentType().substring(typeIndex+1);
 		byte[] fileData = upload.getBytes();
 //      String fileType = upload.getContentType();
-		String checkType = "^(?!)(jpg)|(jpeg)|(png)|(bmp)|(gif)$";
+		String checkType = "^(?!)(jpg)|(jpeg)|(png)|(bmp)$";
 
 		// 파일 최대 업로드 용량(2mb)
 		int maxSize = 1024*1024*2;
@@ -161,7 +161,6 @@ public class MyPageController {
 		
 		logger.info("fileOriginalName : "+upload.getOriginalFilename());
 		logger.info("fileType : "+fileType);
-		logger.info(upload.getContentType());
 		logger.info("fileSize : "+upload.getSize());
 		
 		try {

@@ -25,11 +25,13 @@
       <li class="LinkBtn nav-item dropdown" id="ProductList">
         <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">ProductList</a>
         <div class="dropdown-menu" style="">
-	      <a class="dropdown-item" href="#">CPU</a>
-	      <a class="dropdown-item" href="#">MainBoard</a>
-	      <a class="dropdown-item" href="#">GPU</a>
+	      <a class="dropdown-item" href="${pageContext.request.contextPath}/Product/Main?typeNum=COM100">CPU</a>
+	      <a class="dropdown-item" href="${pageContext.request.contextPath}/Product/Main?typeNum=COM101">VGA</a>
+	      <a class="dropdown-item" href="${pageContext.request.contextPath}/Product/Main?typeNum=COM102">MainBoard</a>
+	      <JSTL:if test="${LoginUser.authority eq 'master'}">
 	      <div class="dropdown-divider"></div>
-	      <a class="dropdown-item" href="${pageContext.request.contextPath}/Product/Main">전체보기</a>
+   		  <a class="dropdown-item" href="${pageContext.request.contextPath}/Product/AddProduct">제품 등록</a>
+		  </JSTL:if>
     	</div>
       </li>
       <li class="LinkBtn nav-item" id="FreeBoard">

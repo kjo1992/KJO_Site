@@ -32,6 +32,8 @@
 		  	<input type="text" class="form-control" name="productName" placeholder="">
 		  	<label class="mt-3">판매가격</label>
 		  	<input type="number" class="form-control" name="productPrice" placeholder="">
+		  	<label class="mt-3">남은수량</label>
+		  	<input type="number" class="form-control" name="amount" placeholder="">
 		  	<label class="mt-3">상품이미지</label>
 		  	<div class="custom-file">
 		   		<label class="custom-file-label" for="productImg" id="productImglabel">등록된 이미지가 없습니다.</label>
@@ -39,7 +41,7 @@
 				<small id="" class="form-text text-muted">bmp, png, jpg, jpeg 만 가능, 개별 파일당 2mb 이하, 최대 4장까지</small>
 			</div>
 			<label class="mt-3">이미지 미리보기</label>
-			<div class="card border-primary card-body" style="height:200px;" id="loadImg_wrap"></div>
+			<div class="jumbotron" style="height:200px; padding:5px;" id="loadImg_wrap"></div>
 		</li>
 	  </div>
 	  <div id="inputData">

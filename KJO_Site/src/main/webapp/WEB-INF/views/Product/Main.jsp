@@ -12,9 +12,30 @@
 <body>
 <nav id="SiteHeader"><jsp:include page="/WEB-INF/views/Layout/Header.jsp" flush="false"></jsp:include></nav>
 <section>
-<JSTL:if test="${LoginUser.authority eq 'master'}">
-<a href="AddProduct"><button class="btn btn-link">제품 등록</button></a>
-</JSTL:if>
+<JSTL:forEach items="${ProductList['ProductList']}" var="list">
+<table class="table table-hover">
+	<tr class="">
+	  <td><img src="${list.productImgPath_0}" width="150px" height="150px"></td>
+      <td><b>${list.productName}</b><br/>
+      	<div style="vertical-align:middle;">
+      		<JSTL:forEach items="${list}" var="spec" varStatus="status" begin="5">
+      			<JSTL:choose>
+      				<JSTL:when test="${status.last}">
+      					${spec.value}
+      				</JSTL:when>
+      				<JSTL:otherwise>
+      					${spec.value} /		
+      				</JSTL:otherwise>
+      			</JSTL:choose>
+			</JSTL:forEach>
+		</div>
+      </td>
+      <td style="width:150px; text-align:center; vertical-align:middle;">남은수량<br/>${list.amount} 개</td>
+      <td style="width:150px; text-align:center; vertical-align:middle;">${list.productPrice} 원</td>
+    </tr>
+</table>
+<hr>
+</JSTL:forEach>
 </section>
 <footer><jsp:include page="/WEB-INF/views/Layout/Footer.jsp" flush="false"></jsp:include></footer>
 </body>

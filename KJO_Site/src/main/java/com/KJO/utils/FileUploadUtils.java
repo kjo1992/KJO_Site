@@ -60,6 +60,11 @@ public class FileUploadUtils {
 			fileUpload(savedPath, savedName, fileData);
 			
 			return "/img/MyPage/"+LoginNum+"/"+savedName;
+		} else if (uploadPath.contains("Product")) {
+			//Product에서는 LoginNum이 ProductName으로 대체
+			String savedPath = uploadPath+LoginNum;
+			fileUpload(savedPath, savedName, fileData);
+			return "/img/Product/"+LoginNum+"/"+savedName;
 		}
 		return null;
 	}

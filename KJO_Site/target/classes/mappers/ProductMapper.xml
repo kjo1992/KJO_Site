@@ -3,27 +3,43 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.KJO.mapper.ProductMapper">
+	<!-- 타입이름 문자열 반환 -->
+	<select id="returnTypeName" resultType="java.util.LinkedHashMap">
+		select * from productType where typeNum=#{typeNum};
+	</select>
+	
+	<!-- 상품별 리스트 목록(페이징) -->
+	<select id="productList" resultType="java.util.LinkedHashMap">
+		select A.productListNum, A.productPrice, A.amount ,A.productImgPath_0, Spec.*
+		from
+		( 
+			select @rownum:=@rownum+1 as rownum, PL.*
+			from (select @rownum:=0) as rownum, productBoard as PL
+			order by productListNum #desc
+		) as A
+		JOIN productSpec_${productType.typeName} as Spec
+		ON A.productName = Spec.productName
+		<![CDATA[
+		where A.rownum > (#{Cri.pageNum}-1)*#{Cri.amount} and A.rownum <= #{Cri.pageNum}*#{Cri.amount};	
+		]]>
+	</select>
+
+	<!-- 상품별 갯수 -->
+	<select id="ProductCount" resultType="int">
+		select count(*) from productBoard where typeNum = #{typeNum};
+	</select>
+
 	<!-- 상품전체목록 타입 가져오기 -->
 	<select id="ProductTypeList" resultType="com.KJO.model.ProductBoardVO">
 		select *
 		from productType;
 	</select>
 	
-	<select id="ProductSpec" resultType="com.KJO.model.ProductSpecVO">
-		select *
-		from productSpec_CPU;
-	</select>
-	
-	<!-- 해쉬맵 반환 테스트 -->
-	<select id="test" resultType="HashMap">
-		show columns from productSpec_vga;
-	</select>
-	
 	<!-- 상품 게시판 작성 -->
 	<insert id="productBoardInsert">
-		Insert into productBoard(productName, productPrice, typeNum, regDate)
+		Insert into productBoard(productName, productPrice, typeNum, regDate, amount, productImgPath_0, productImgPath_1, productImgPath_2, productImgPath_3)
 		values(
-		 #{productName}, #{productPrice}, #{typeNum}, sysdate()
+		 #{productName}, #{productPrice}, #{typeNum}, sysdate(), #{amount}, #{productImgPath_0}, #{productImgPath_1}, #{productImgPath_2}, #{productImgPath_3}
 		);
 	</insert>
 	
@@ -41,7 +57,6 @@
 				<![CDATA[
 				VALUES (#{productName}, #{manufacturer}, #{chipsetManufacturer}, #{vgaSeries}, #{baseClock}, #{boostClock}, #{processAmount}, #{pciInterface}, #{memoryType}, #{memorySize}, #{memoryBus}, #{hdmiPort}, #{dpPort}, #{supportMonitorAmount}, #{maxTDP}, #{recommendTDP}, #{powerPort}, #{powerPhase}, #{supportMultiVga}, #{support4K}, #{support5K});
 				]]>
-				
 			</when>
 		</choose>
 	</insert>
