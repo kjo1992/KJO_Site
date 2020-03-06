@@ -144,5 +144,8 @@ public class ProductController {
 	}
 	
 	//상품 상세보기
-	
+	@RequestMapping(value="Detail/{productType}", method=RequestMethod.GET)
+	public ModelAndView productDetail(@PathVariable("productType") String productType) throws Exception {
+		return null;
+	}
 }

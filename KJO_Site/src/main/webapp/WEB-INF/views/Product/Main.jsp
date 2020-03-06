@@ -16,7 +16,7 @@
 <table class="table table-hover">
 	<tr class="">
 	  <td><img src="${list.productImgPath_0}" width="150px" height="150px"></td>
-      <td><b>${list.productName}</b><br/>
+      <td><a href=""><b>${list.productName}</b></a><br/>
       	<div style="vertical-align:middle;">
       		<JSTL:forEach items="${list}" var="spec" varStatus="status" begin="5">
       			<JSTL:choose>
