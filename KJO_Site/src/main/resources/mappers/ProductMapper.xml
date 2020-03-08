@@ -4,20 +4,23 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.KJO.mapper.ProductMapper">
 	<!-- 타입이름 문자열 반환 -->
-	<select id="returnTypeName" resultType="java.util.LinkedHashMap">
+	<!-- <select id="returnTypeName" resultType="java.util.LinkedHashMap">
 		select * from productType where typeNum=#{typeNum};
+	</select> -->
+	<select id="returnTypeName" resultType="string">
+		select typeName from productType where typeNum=#{typeNum};
 	</select>
 	
 	<!-- 상품별 리스트 목록(페이징) -->
 	<select id="productList" resultType="java.util.LinkedHashMap">
-		select A.productListNum, A.productPrice, A.amount ,A.productImgPath_0, Spec.*
+		select A.productListNum, A.typeNum, A.productPrice, A.amount ,A.productImgPath_0, Spec.*
 		from
 		( 
 			select @rownum:=@rownum+1 as rownum, PL.*
 			from (select @rownum:=0) as rownum, productBoard as PL
 			order by productListNum #desc
 		) as A
-		JOIN productSpec_${productType.typeName} as Spec
+		JOIN productSpec_${typeName} as Spec
 		ON A.productName = Spec.productName
 		<![CDATA[
 		where A.rownum > (#{Cri.pageNum}-1)*#{Cri.amount} and A.rownum <= #{Cri.pageNum}*#{Cri.amount};	
@@ -60,4 +63,13 @@
 			</when>
 		</choose>
 	</insert>
+	
+	<!-- 상품게시판 Detail -->
+	<select id="productDetail" resultType="java.util.LinkedHashMap">
+		select A.productListNum, A.typeNum, A.productPrice, A.amount , A.productImgPath_0, A.productImgPath_1, A.productImgPath_2, A.productImgPath_3, Spec.*
+		from productBoard as A
+		JOIN productSpec_${typeName} as Spec
+		ON A.productName = Spec.productName
+		where Spec.productName = #{productName};
+	</select>
 </mapper>

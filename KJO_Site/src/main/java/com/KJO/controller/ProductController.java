@@ -48,7 +48,7 @@ public class ProductController {
 		logger.info("Product Main type : "+typeNum);
 		
 		//테이블을 불러오기 위한 제품 타입명을 가져오고 맵에 저장
-		map.put("productType", PS.proudctTypeName(typeNum));
+		map.put("typeName", PS.proudctTypeName(typeNum));
 
 		Criteria cri = new Criteria(1, 5);
 		map.put("Cri", cri);
@@ -126,9 +126,6 @@ public class ProductController {
 		
 		logger.info("map : "+map);
 		
-		//form 입력값을 map으로 전달, 테스트동안 주석처리
-//		PS.productBoardWrite(map);
-		
 		return "redirect:/Product/Main";
 	}
 	
@@ -144,8 +141,24 @@ public class ProductController {
 	}
 	
 	//상품 상세보기
-	@RequestMapping(value="Detail/{productType}", method=RequestMethod.GET)
-	public ModelAndView productDetail(@PathVariable("productType") String productType) throws Exception {
-		return null;
+	@RequestMapping(value="Detail", method=RequestMethod.GET)
+	public ModelAndView productDetail(@RequestParam String typeNum, @RequestParam String productName) throws Exception {
+		logger.info("product Detail type : "+typeNum);
+		String typeName = PS.proudctTypeName(typeNum);
+		String loadPage = typeName+".jsp";
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("typeName", typeName);
+		map.put("productName", productName);
+		logger.info("product Detail data map : "+map);
+		
+		/* ModelAndView mv = new ModelAndView("/Product/detail/"+typeName); */
+		ModelAndView mv = new ModelAndView("/Product/detail/DetailMain");
+		/* mv.setViewName("/Product/detail/"+typeName); */
+		mv.addObject("productDetail", PS.productDetail(map));
+		mv.addObject("loadPage", loadPage); // /contextPath/WEB-INF/views/Product/detail/typeName.jsp
+		logger.info("ModelAndView : "+mv);
+		
+		return mv;
 	}
 }

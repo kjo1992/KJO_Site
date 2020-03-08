@@ -10,7 +10,7 @@ import com.KJO.model.ProductSpecVO;
 
 public interface ProductService {
 	//상품 타입코드 > 타입코드,이름
-	public Map<String, Object> proudctTypeName(String typeNum) throws Exception;
+	public String proudctTypeName(String typeNum) throws Exception;
 	
 	//상품 목록 타입별 보기(페이징)
 	public Map<String, List> ProductListMain(Map<String, Object> map) throws Exception;
@@ -23,4 +23,7 @@ public interface ProductService {
 	
 	//상품 게시판, 상숨 스펙 글쓰기
 	public void productBoardWrite(Map<String, Object> map) throws Exception;
+	
+	//상품 Detail
+	public Map<String, Object> productDetail(Map<String, String> map) throws Exception;
 }

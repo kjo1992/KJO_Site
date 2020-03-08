@@ -21,7 +21,7 @@ public class ProductMapperImpl implements ProductMapper {
 	
 	//상품 타입 코드 > 이름
 	@Override
-	public Map<String, Object> productTypeName(String typeNum) throws Exception {
+	public String productTypeName(String typeNum) throws Exception {
 		return SQL.selectOne(path+".returnTypeName",typeNum);
 	}
 	
@@ -52,5 +52,12 @@ public class ProductMapperImpl implements ProductMapper {
 	public void productBoardWrite(Map<String, Object> map) throws Exception {
 		SQL.insert(path+".productBoardInsert",map);
 		SQL.insert(path+".productSpecInsert",map);
+	}
+
+	
+	//상품 Detail
+	@Override
+	public Map<String, Object> productDetail(Map<String, String> map) throws Exception {
+		return SQL.selectOne(path+".productDetail", map);
 	}
 }

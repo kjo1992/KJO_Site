@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+.key {
+	background-color:lightgray;
+	width:20%;
+	text-align:center;
+}
+
+.value{
+	width:30%;
+}
+
+.key .value {
+	border:1px solid;
+}

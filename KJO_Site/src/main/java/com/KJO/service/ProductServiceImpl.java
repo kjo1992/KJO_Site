@@ -20,7 +20,7 @@ public class ProductServiceImpl implements ProductService{
 	
 	//상품 타입코드 > 이름
 	@Override
-	public Map<String, Object> proudctTypeName(String typeNum) throws Exception {
+	public String proudctTypeName(String typeNum) throws Exception {
 		return PM.productTypeName(typeNum);
 	}
 	
@@ -47,5 +47,10 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public void productBoardWrite(Map<String, Object> map) throws Exception {
 		PM.productBoardWrite(map);
+	}
+
+	@Override
+	public Map<String, Object> productDetail(Map<String, String> map) throws Exception {
+		return PM.productDetail(map);
 	}
 }
