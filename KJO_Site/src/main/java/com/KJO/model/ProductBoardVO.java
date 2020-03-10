@@ -3,7 +3,7 @@ package com.KJO.model;
 import java.util.Date;
 
 public class ProductBoardVO {
-	private Integer productNum;
+	private Integer productListNum;
 	private String typeNum;
 	private String typeName;
 	private String productName;
@@ -16,14 +16,14 @@ public class ProductBoardVO {
 	private int rating;
 	private int amount;
 	
-	public Integer getProductNum() {
-		return productNum;
+	public Integer getproductListNum() {
+		return productListNum;
 	}
 
 
 
-	public void setProductNum(Integer productNum) {
-		this.productNum = productNum;
+	public void setproductListNum(Integer productListNum) {
+		this.productListNum = productListNum;
 	}
 
 
@@ -162,7 +162,7 @@ public class ProductBoardVO {
 
 	@Override
 	public String toString() {
-		return "ProductBoardVO [productNum=" + productNum + ", typeNum=" + typeNum + ", typeName=" + typeName
+		return "ProductBoardVO [productListNum=" + productListNum + ", typeNum=" + typeNum + ", typeName=" + typeName
 				+ ", productName=" + productName + ", productPrice=" + productPrice + ", productImgPath_0="
 				+ productImgPath_0 + ", productImgPath_1=" + productImgPath_1 + ", productImgPath_2=" + productImgPath_2
 				+ ", productImgPath_3=" + productImgPath_3 + ", regDate=" + regDate + ", rating=" + rating + "]";

@@ -20,7 +20,7 @@
 <h3>${productDetail.productName}</h3>
 </div>
 <div class="card-body">
-	<table style="border:1px solid; width:100%;">
+	<table style="border:1px solid; width:100%;">			
 	<tr>
 		<td style="width:400px;">
 		<div class="" style="width:300px; margin:0 auto;">
@@ -46,14 +46,24 @@
 			</div>
 		</div>
 		</td>
-		<td rowspan="2">
+		<td rowspan="3" style="vertical-align: top;">
 			<jsp:include page="${loadPage}" flush="false"></jsp:include>
 		</td>
 	</tr>
 	<tr>
-		<td>
-			남은수량 : ${productDetail.amount}<br/> 
+		<td style="text-align:center;">
+			남은수량 : ${productDetail.amount} 개<br/> 
 			상품가격 : ${productDetail.productPrice}
+		</td>
+	</tr>
+	<tr>
+		<td style="text-align:center;">
+			<form>
+				<input type="number" value="${productDetail.productListNum}" name="productListNum" id="productListNum" hidden>
+				<%-- <input type="text" value="${LoginUser.userNum}" name="userNum" id="userNum" hidden> --%>
+				수량 : <input type="number" min="1" max="10" value="1" name="amount" id="amount"><br/>
+				<input type="button" value="장바구니 추가" id="addCartBtn">
+			</form>
 		</td>
 	</tr>
 	</table>

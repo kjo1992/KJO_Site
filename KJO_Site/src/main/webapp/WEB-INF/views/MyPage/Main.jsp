@@ -122,6 +122,26 @@
 	
 	</div>
 </div>
+
+<div class="card mb-3">
+	<h5 class="card-header">주문목록<small></small></h5>
+	<div class="card-body">
+		<table class="table table-hover" style="table-layout:fixed; word-break:break-all;">
+			<tr>
+				<th scope="col">주문번호</th>
+				<th>주문일자</th>
+				<th>배송상태</th>
+			</tr>
+		<JSTL:forEach items="${orderList}" var="list" varStatus="status">
+			<tr>
+				<td><h5>${list.orderNum}</h5></td>
+				<td><fmt:formatDate value="${list.orderDate}" pattern="yyyy-MM-dd HH:mm"/></td>
+				<td>${list.totalPrice}</td>
+			</tr>
+		</JSTL:forEach>
+		</table>
+	</div>
+</div>
 </section>
 <footer><jsp:include page="/WEB-INF/views/Layout/Footer.jsp" flush="false"></jsp:include></footer>
 <script src="${pageContext.request.contextPath}/resources/js/MyPage/Main.js"></script>

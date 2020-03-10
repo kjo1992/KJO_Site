@@ -76,4 +76,15 @@ public class CheckUtils {
 		out.println("</script>");
 		out.flush();
 	}
+	
+	//path로 리다이렉트
+	public void redirectPage(HttpServletRequest request, HttpServletResponse response, String msg, String target) throws Exception{
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		out.println("<script type='text/javascript'>");
+		out.println("alert('"+msg+"')");
+		out.println("location.href = '"+request.getContextPath()+target+"';");
+		out.println("</script>");
+		out.flush();
+	}
 }

@@ -47,6 +47,7 @@
 			<mapping path="/FreeBoard/WriteReply"/>
 			<mapping path="/FreeBoard/DeleteReply"/>
 			<mapping path="/MyPage/*"/>
+			<mapping path="/cart/*"/>
 			<beans:ref bean="LoginChkInterceptor"/>
 		</interceptor>
 		<interceptor>

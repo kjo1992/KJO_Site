@@ -39,6 +39,13 @@
 		]]>
 	</select>
 	
+	<!-- 주문목록 -->
+	<select id="myOrderList" resultType="com.KJO.model.orderBoardVO">
+		select *
+		from orderBoard
+		where userNum = #{userNum};
+	</select>
+	
 	<!-- 회원탈퇴 -->
 	<delete id="UserDelete">
 		delete from UserInfo where userNum=#{userNum};

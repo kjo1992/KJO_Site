@@ -12,6 +12,7 @@ import com.KJO.model.Criteria;
 import com.KJO.model.FreeBoardVO;
 import com.KJO.model.LoginVO;
 import com.KJO.model.UserVO;
+import com.KJO.model.orderBoardVO;
 
 @Repository
 public class MyPageMapperImpl implements MyPageMapper{
@@ -33,6 +34,13 @@ public class MyPageMapperImpl implements MyPageMapper{
 		MyBoard.put("FreeBoardList", SQL.selectList(path+".FreeBoardList", map));
 		MyBoard.put("FreeBoardReply", SQL.selectList(path+".FreeBoardReply", map));
 		return MyBoard;
+	}
+	
+	//주문목록 가져오기
+	@Override
+	public List<orderBoardVO> myOrderList(LoginVO LoginUser) throws Exception {
+		List<orderBoardVO> list = SQL.selectList(path+".myOrderList", LoginUser);
+		return list;
 	}
 	
 	//회원탈퇴
@@ -57,6 +65,5 @@ public class MyPageMapperImpl implements MyPageMapper{
 	public int pwChk(Map<String, String> map) throws Exception {
 		return SQL.selectOne(path+".pwChk", map);
 	}
-	
 
 }

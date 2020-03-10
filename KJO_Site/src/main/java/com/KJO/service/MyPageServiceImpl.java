@@ -10,6 +10,7 @@ import com.KJO.mapper.MyPageMapper;
 import com.KJO.model.Criteria;
 import com.KJO.model.LoginVO;
 import com.KJO.model.UserVO;
+import com.KJO.model.orderBoardVO;
 
 @Service
 public class MyPageServiceImpl implements MyPageService{
@@ -26,6 +27,12 @@ public class MyPageServiceImpl implements MyPageService{
 	@Override
 	public Map<String, List> MyFBListGet(Map<String, Object> map) throws Exception {
 		return MM.MyFBListGet(map);
+	}
+	
+	//주문목록 가져오기
+	@Override
+	public List<orderBoardVO> myOrderList(LoginVO LoginUser) throws Exception {
+		return MM.myOrderList(LoginUser);
 	}
 	
 	//회원탈퇴
@@ -45,9 +52,11 @@ public class MyPageServiceImpl implements MyPageService{
 	public int imgUpdate(LoginVO LoginUser) throws Exception {
 		return MM.imgUpdate(LoginUser);
 	}
-
+	
+	//비밀번호 확인
 	@Override
 	public int pwChk(Map<String, String> map) throws Exception {
 		return MM.pwChk(map);
 	}
+
 }

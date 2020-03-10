@@ -7,6 +7,7 @@ import com.KJO.model.Criteria;
 import com.KJO.model.FreeBoardVO;
 import com.KJO.model.LoginVO;
 import com.KJO.model.UserVO;
+import com.KJO.model.orderBoardVO;
 
 public interface MyPageMapper {
 	
@@ -15,6 +16,9 @@ public interface MyPageMapper {
 	
 	//내가 작성한 게시글, 댓글 목록 가져오기
 	public Map<String, List> MyFBListGet(Map<String, Object> map) throws Exception;
+	
+	//주문목록 가져오기
+	public List<orderBoardVO> myOrderList(LoginVO LoginUser) throws Exception;
 	
 	//회원탈퇴
 	public void UserDelete(LoginVO LoginUser) throws Exception;

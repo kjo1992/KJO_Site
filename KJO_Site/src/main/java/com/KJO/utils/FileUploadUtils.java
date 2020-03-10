@@ -29,7 +29,7 @@ public class FileUploadUtils {
 	}
 	
 	// 일자에 따른 경로계산
-	private static String calcPath(String uploadPath, String LoginNum) {
+	public String calcPath() {
 		Calendar cal = Calendar.getInstance();
 		// '/yyyy'(yearPath)
 		String yearPath = File.separator+cal.get(Calendar.YEAR);
@@ -48,7 +48,8 @@ public class FileUploadUtils {
 		String savedName = uid.toString().replace("-","")+"."+fileType;
 		
 		if(uploadPath.contains("FreeBoard")) {
-			String calcPath = calcPath(uploadPath, LoginNum);
+//			String calcPath = calcPath(uploadPath, LoginNum);
+			String calcPath = calcPath();
 			String savedPath = uploadPath+LoginNum+calcPath;
 			
 			fileUpload(savedPath, savedName, fileData);

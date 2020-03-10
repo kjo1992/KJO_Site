@@ -37,6 +37,11 @@
       <li class="LinkBtn nav-item" id="FreeBoard">
         <a class="nav-link" href="${pageContext.request.contextPath}/FreeBoard/List">자유게시판</a>
       </li>
+      <JSTL:if test="${LoginUser ne null}">
+      <li class="LinkBtn nav-item" id="cartList">
+        <a class="nav-link" href="${pageContext.request.contextPath}/cart/list">장바구니</a>
+      </li>
+      </JSTL:if>
 	  <JSTL:if test="${LoginUser ne null}">
       <li class="LinkBtn nav-item" id="MyPage">
         <a class="nav-link" href="${pageContext.request.contextPath}/MyPage/Main">마이페이지</a>

@@ -46,7 +46,7 @@ public class MyPageController {
 	
 	CheckUtils PathCheck = new CheckUtils();
 	
-	//마이페이지 이동-게시판에 작성한 본인글, 댓글 가져오기
+	//마이페이지 이동-게시판에 작성한 본인글, 댓글, 주문목록 가져오기
 	@RequestMapping(value="Main", method=RequestMethod.GET)
 	public String MainMove(HttpServletRequest request, HttpServletResponse response
 			, ModelMap model, Map<String, Object> map) throws Exception {
@@ -62,6 +62,7 @@ public class MyPageController {
 		
 		model.addAttribute("UserInfoGet", MPS.UserInfoGet(LoginUser));
 		model.addAttribute("FreeBoard", MPS.MyFBListGet(map));
+		model.addAttribute("orderList", MPS.myOrderList(LoginUser));
 		return "MyPage/Main";
 	}
 	
