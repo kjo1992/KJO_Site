@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.KJO.model.Criteria;
 import com.KJO.service.FreeBoardService;
@@ -27,19 +28,23 @@ public class HomeController {
 	private ProductService PS;
 
 	@RequestMapping(value = "HomePage", method = RequestMethod.GET)
-	public String MainPage(ModelMap model) throws Exception {
+	public ModelAndView MainPage() throws Exception {
 		logger.info("HomePage Connect");
+		ModelAndView mv = new ModelAndView("Main/HomePage");
 		Criteria cri = new Criteria(1, 5);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("Cri", cri);
 		
-		//자유게시판 5개
-		model.addAttribute("FreeBoard", BS.FreeBoardListPaging(cri));
 		//최근 작성된 상품평 5개
-		model.addAttribute("productReply", PS.productReplyGet(map));
+		mv.addObject("productReply", PS.productReplyGet(map));
 		//최근추가된 상품목록 5개
-		model.addAttribute("productList", PS.ProductListMain(map));
-		return "Main/HomePage";
+		mv.addObject("productList", PS.ProductListMain(map));
+		//자유게시판 5개
+		mv.addObject("FreeBoard", BS.FreeBoardListPaging(cri));
+		
+		logger.info("HomePage Model : "+mv);
+		
+		return mv;
 	}
 	
 }

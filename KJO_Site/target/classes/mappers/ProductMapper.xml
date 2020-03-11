@@ -30,7 +30,7 @@
 		]]>
 	</select> -->
 	<select id="productList" resultType="java.util.LinkedHashMap">
-		select A.productListNum, A.typeNum, A.productPrice, A.amount, A.rating, A.productImgPath_0<if test="typeNum != null">, Spec.*</if>
+		select A.productListNum, A.typeNum, A.productName, A.productPrice, A.amount, A.rating, A.productImgPath_0<if test="typeNum != null">, Spec.*</if>
 		from
 		( 
 			select @rownum:=@rownum+1 as rownum, PL.*, avgRat.rating
