@@ -13,6 +13,7 @@
   <div class="tab-pane fade active show" id="home">
   	<p class="mt-3"><b>제작자 : </b>김진오</p>
     <p>그린컴퓨터아카데미 디지털컨버전스(JAVA(자바)기반 응용SW엔지니어링) 훈련과정 (2019.03.23 ~ 2020.03.13) 훈련생</p>
+    <p>github : <a href="https://github.com/kjo1992/KJO_Site/tree/master/KJO_Site">https://github.com/kjo1992/KJO_Site/tree/master/KJO_Site</a></p>
   </div>
   <div class="tab-pane fade" id="profile">
   	<ul class="mt-3">
