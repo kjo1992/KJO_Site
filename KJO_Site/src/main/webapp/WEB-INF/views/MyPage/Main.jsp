@@ -98,8 +98,7 @@
 		</table>
 		
 	</div>
-	<h5 class="card-header">내가 작성한 댓글<small>(최근5개)</small>
-	</h5>
+	<h5 class="card-header">내가 작성한 댓글<small>(최근5개)</small></h5>
 	<div class="card-body">
 		<table class="table table-hover" style="table-layout:fixed; word-break:break-all;">
 			<thead>
@@ -119,7 +118,37 @@
 				</JSTL:forEach>			
 			</tbody>
 		</table>
-	
+	</div>
+	<h5 class="card-header">내가 작성한 상품평<small>(최근5개)</small></h5>
+	<div class="card-body">
+		<table class="table table-hover" style="table-layout:fixed; word-break:break-all;">
+			<thead>
+				<tr class="text-center">
+					<th scope="col" style="width:10%;">평점</th>
+					<th scope="col" style="width:30%;">상품명</th>
+					<th scope="col" style="width:35%;">내용</th>
+					<th scope="col" style="width:20%;">작성일자</th>
+				</tr>
+			</thead>
+			<tbody>
+				<JSTL:forEach items="${replyList}" var="MyReply">
+					<tr class="text-center">
+						<td class="small">
+							<b><fmt:formatNumber pattern="#.00" value="${MyReply.rating}"></fmt:formatNumber></b>
+						</td>
+						<td class="small">
+							<a href="${pageContext.request.contextPath}/Product/Detail?typeNum=${MyReply.typeNum}&productName=${MyReply.productName}&productListNum=${MyReply.productListNum}">${MyReply.productName}</a>
+						</td>
+						<td class="small">
+							<p>${MyReply.replyText}</p>
+						</td>
+						<td class="small">
+							<fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${MyReply.regDate}"/>
+						</td>
+					</tr>
+				</JSTL:forEach>			
+			</tbody>
+		</table>
 	</div>
 </div>
 
@@ -127,16 +156,21 @@
 	<h5 class="card-header">주문목록<small></small></h5>
 	<div class="card-body">
 		<table class="table table-hover" style="table-layout:fixed; word-break:break-all;">
-			<tr>
-				<th scope="col">주문번호</th>
-				<th>주문일자</th>
-				<th>배송상태</th>
+			<tr style="text-align:center;">
+				<th scope="col">주문번호(주문일자)</th>
+				<th>수령인</th>
+				<th>배송지</th>
+				<th>가격</th>
 			</tr>
 		<JSTL:forEach items="${orderList}" var="list" varStatus="status">
-			<tr>
-				<td><h5>${list.orderNum}</h5></td>
-				<td><fmt:formatDate value="${list.orderDate}" pattern="yyyy-MM-dd HH:mm"/></td>
-				<td>${list.totalPrice}</td>
+			<tr style="text-align:center;">
+				<td>
+					<h6><a href="${pageContext.request.contextPath}/order/detail?orderNum=${list.orderNum}">${list.orderNum}</a></h6>
+					<small>(<fmt:formatDate value="${list.orderDate}" pattern="yyyy-MM-dd HH:mm"/>)</small>
+				</td>
+				<td>${list.recipient}</td>
+				<td>${list.recipientAdrress}</td>
+				<td><fmt:formatNumber value="${list.totalPrice}" pattern="#,###"></fmt:formatNumber>&nbsp;￦</td>
 			</tr>
 		</JSTL:forEach>
 		</table>

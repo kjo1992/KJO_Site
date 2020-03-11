@@ -59,4 +59,9 @@ public class MyPageServiceImpl implements MyPageService{
 		return MM.pwChk(map);
 	}
 
+	@Override
+	public List<Map> myProductReply(Map<String, Object> map) throws Exception {
+		return MM.myProductReply(map);
+	}
+
 }

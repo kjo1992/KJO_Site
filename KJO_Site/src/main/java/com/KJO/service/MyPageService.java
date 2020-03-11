@@ -29,4 +29,7 @@ public interface MyPageService {
 	
 	//비밀번호 재확인
 	public int pwChk(Map<String, String> map) throws Exception;
+	
+	//상품평 가져오기
+	public List<Map> myProductReply(Map<String, Object> map) throws Exception;
 }

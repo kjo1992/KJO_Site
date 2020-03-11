@@ -65,5 +65,12 @@ public class MyPageMapperImpl implements MyPageMapper{
 	public int pwChk(Map<String, String> map) throws Exception {
 		return SQL.selectOne(path+".pwChk", map);
 	}
+	
+	//작성한 상품평 리스트
+	@Override
+	public List<Map> myProductReply(Map<String, Object> map) throws Exception {
+		List<Map> list = SQL.selectList(path+".myProductReply", map);
+		return list;
+	}
 
 }

@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.KJO.mapper.ProductMapper;
 import com.KJO.model.Criteria;
 import com.KJO.model.ProductBoardVO;
-import com.KJO.model.ProductSpecVO;
+import com.KJO.model.productReplyVO;
 
 @Service
 public class ProductServiceImpl implements ProductService{
@@ -48,9 +48,42 @@ public class ProductServiceImpl implements ProductService{
 	public void productBoardWrite(Map<String, Object> map) throws Exception {
 		PM.productBoardWrite(map);
 	}
-
+	
+	//상품 상세보기
 	@Override
 	public Map<String, Object> productDetail(Map<String, String> map) throws Exception {
 		return PM.productDetail(map);
 	}
+	
+	//상품평 중복 체크
+	@Override
+	public int productReplyChk(productReplyVO PRV) throws Exception {
+		return PM.productReplyChk(PRV);
+	}
+	
+	//상품평 작성
+	@Override
+	public int addProductReply(productReplyVO PRV) throws Exception {
+		return PM.addProductReply(PRV);
+	}
+	
+	//상품별 상품평 가져오기
+	@Override
+	public List<Map> productReplyGet(Map<String, Object> map) throws Exception {
+		return PM.productReplyGet(map);
+	}
+	
+	//상품별 댓글 수 가져오기
+	@Override
+	public int replyCount(int productListNum) throws Exception {
+		return PM.replyCount(productListNum);
+	}
+	
+	//상품평 삭제
+	@Override
+	public int deleteReply(productReplyVO PRV) throws Exception {
+		return PM.deleteReply(PRV);
+	}
+	
+	
 }

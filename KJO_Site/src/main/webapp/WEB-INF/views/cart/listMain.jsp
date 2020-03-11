@@ -11,15 +11,6 @@
 <body>
 <nav id="SiteHeader"><jsp:include page="/WEB-INF/views/Layout/Header.jsp" flush="false"></jsp:include></nav>
 <section>
-<!-- <div>
-	<span style="float:left;" class="custom-control custom-checkbox">
-		<input type="checkbox" class="custom-control-input" id="allCheck">
-		<label class="custom-control-label" for="allCheck">모두 선택</label>
-	</span>
-	<span style="float: right;">
-		<button class="btn btn-secondary btn-sm" id="selectDeleteBtn">선택삭제</button>
-	</span>
-</div> -->
 <table style="width:100%;" class="table table-hover">
 	<thead>
 	<tr>
@@ -61,7 +52,7 @@
 					</div>
 					<input type="number" class="form-control changeAmount_${list.cartNum}" value="${list.amount}">
 					<div class="input-group-append">
-						<span class="input-group-text changeAmountBtn" data-cartNum="${list.cartNum}">변경</span>
+						<span class="input-group-text btn changeAmountBtn" data-cartNum="${list.cartNum}">변경</span>
 					</div>
 				</div>
 				<div>
@@ -74,7 +65,7 @@
 			<fmt:formatNumber value="${amountPrice}" pattern="#,###"></fmt:formatNumber> ￦
 		</td>
 		<td style="vertical-align: middle;">
-			<button class="btn btn-secondary" id="deleteBtn" data-cartNum="${list.cartNum}">삭제</button>
+			<button class="btn btn-secondary deleteBtn" id="" data-cartNum="${list.cartNum}">삭제</button>
 		</td>
 	</tr>
 	<JSTL:set var="totalPrice" value="${totalPrice + amountPrice}"></JSTL:set>

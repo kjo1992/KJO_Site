@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.KJO.mapper.orderMapper">
+	<select id="orderDetail" resultType="java.util.LinkedHashMap">
+		select 
+			OB.orderNum, OB.recipient, OB.recipientAdrress, OB.recipientContact, OB.totalPrice, OB.orderDate,
+		    OBD.productListNum, OBD.amount,
+		    PB.productName, PB.productPrice, PB.productImgPath_0
+		from orderBoard as OB
+		join orderBoardDetail as OBD
+		on OB.orderNum = OBD.orderNum
+		join productBoard as PB
+		on OBD.productListNum = PB.productListNum
+		where OB.userNum = #{userNum} and OB.orderNum = #{orderNum};
+	</select>
+</mapper>

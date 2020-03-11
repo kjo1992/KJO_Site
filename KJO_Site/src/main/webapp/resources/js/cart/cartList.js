@@ -84,13 +84,12 @@ $(document).ready(function(){
 		}// if
 	})// on click
 	
-	$("#deleteBtn").on("click", function() {
+	$(".deleteBtn").on("click", function() {
 		var confirmChk = confirm("선택한 제품을 장바구니에서 삭제하시겠습니까?");
 		
 		if(confirmChk) {
 			var checkArr = new Array();
 			
-			/*alert($(this).attr("data-cartNum"));*/
 			checkArr.push($(this).attr("data-cartNum"));
 			
 			console.log(checkArr);
@@ -150,39 +149,5 @@ $(document).ready(function(){
 		$("#inputOrderForm").attr("hidden",true);
 		$(".orderInput").val("");
 		$("#inputOrderBtn").fadeIn();
-	});
-	
-	$("#orderSubmit").on("click", function() {
-		/*var orderForm = $("form[name='orderForm']").serialize();
-		
-		var checkArr = new Array();
-		$("input:checkbox[name='chkBox']:checked").each(function(){
-			checkArr.push($(this).attr("data-productListNum"));
-		});
-		
-		console.log(checkArr);
-		
-		orderForm.value=checkArr;
-//		orderForm.append("productListNum",checkArr);
-		
-		console.log(orderForm);
-		alert(orderForm);*/
-		
-
-		
-		/*$.ajax({
-			url:"addOrder",
-			type:"post",
-			dataType:"json",
-			data:orderForm,
-			contentType : "application/json; charset=utf-8",
-			success:function(result){
-				alert("success : "+result);
-			},
-			error:function(request,status,error){
-				alert("Error! :" +error);
-				alert(request.status);
-			}
-		});//ajax*/	
 	});
 })

@@ -48,6 +48,7 @@
 			<mapping path="/FreeBoard/DeleteReply"/>
 			<mapping path="/MyPage/*"/>
 			<mapping path="/cart/*"/>
+			<mapping path="/order/*"/>
 			<beans:ref bean="LoginChkInterceptor"/>
 		</interceptor>
 		<interceptor>

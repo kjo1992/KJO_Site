@@ -12,6 +12,12 @@
 <nav id="SiteHeader"><jsp:include page="/WEB-INF/views/Layout/Header.jsp" flush="false"></jsp:include></nav>
 <section>
 <div class="card mb-3">
+${productList}
+</div>
+<div class="card mb-3">
+${productReply}
+</div>
+<div class="card mb-3">
 	<table class="table table-hover" style="table-layout:fixed; word-break:break-all;">
 	<thead>
 		<tr class="text-center">
@@ -22,6 +28,12 @@
 			<th scope="col" style="width:15%;">조회수</th>
 		</tr>
 	</thead>
+	<tbody>
+	
+	</tbody>
+	<tbody>
+	
+	</tbody>
 	<tbody>
 		<JSTL:forEach items="${FreeBoard}" var="FreeBoard">
 			<tr class="text-center">

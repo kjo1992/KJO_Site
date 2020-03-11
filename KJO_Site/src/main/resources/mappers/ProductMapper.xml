@@ -12,16 +12,40 @@
 	</select>
 	
 	<!-- 상품별 리스트 목록(페이징) -->
-	<select id="productList" resultType="java.util.LinkedHashMap">
-		select A.productListNum, A.typeNum, A.productPrice, A.amount ,A.productImgPath_0, Spec.*
+	<!-- <select id="productList" resultType="java.util.LinkedHashMap">
+		select A.productListNum, A.typeNum, A.productPrice, A.amount, A.rating, A.productImgPath_0, Spec.*
 		from
 		( 
-			select @rownum:=@rownum+1 as rownum, PL.*
+			select @rownum:=@rownum+1 as rownum, PL.*, avgRat.rating
 			from (select @rownum:=0) as rownum, productBoard as PL
-			order by productListNum #desc
+			JOIN (select productListNum, avg(rating) as rating from productReply group by productListNum) as avgRat
+			ON PL.productListNum = avgRat.productListNum
+			where PL.typeNum = #{typeNum}
+			order by productListNum desc
 		) as A
 		JOIN productSpec_${typeName} as Spec
 		ON A.productName = Spec.productName
+		<![CDATA[
+		where A.rownum > (#{Cri.pageNum}-1)*#{Cri.amount} and A.rownum <= #{Cri.pageNum}*#{Cri.amount};	
+		]]>
+	</select> -->
+	<select id="productList" resultType="java.util.LinkedHashMap">
+		select A.productListNum, A.typeNum, A.productPrice, A.amount, A.rating, A.productImgPath_0<if test="typeNum != null">, Spec.*</if>
+		from
+		( 
+			select @rownum:=@rownum+1 as rownum, PL.*, avgRat.rating
+			from (select @rownum:=0) as rownum, productBoard as PL
+			JOIN (select productListNum, avg(rating) as rating from productReply group by productListNum) as avgRat
+			ON PL.productListNum = avgRat.productListNum
+			<if test="typeNum != null">
+			where PL.typeNum = #{typeNum}	
+			</if>
+			order by productListNum desc
+		) as A
+		<if test="typeNum != null">
+		JOIN productSpec_${typeName} as Spec
+		ON A.productName = Spec.productName
+		</if>
 		<![CDATA[
 		where A.rownum > (#{Cri.pageNum}-1)*#{Cri.amount} and A.rownum <= #{Cri.pageNum}*#{Cri.amount};	
 		]]>
@@ -72,4 +96,53 @@
 		ON A.productName = Spec.productName
 		where Spec.productName = #{productName};
 	</select>
+	
+	<!-- 상품평 중복 댓글 체크 -->
+	<select id="productReplyChk" resultType="int">
+		select count(*) from productReply where productListNum=#{productListNum} and userNum=#{userNum};
+	</select>
+	
+	<!-- 상품평 작성 -->
+	<insert id="addProductReply">
+		INSERT INTO productReply(productListNum, userNum, userName, replyText, rating)
+		VALUES(#{productListNum}, #{userNum}, (select userName from userInfo where userNum=#{userNum}),#{replyText}, #{rating});
+	</insert>
+	
+	<!-- 상품별 상품평 가져오기 -->
+	<!-- <select id="productReplyGet" resultType="com.KJO.model.productReplyVO">
+		select * from productReply where productListNum = #{productListNum};
+	</select> -->
+	<!-- 상품별 상품평 가져오기(페이징처리), MyPage, Main, Product 참고 -->
+	<select id="productReplyGet" resultType="java.util.LinkedHashMap" parameterType="hashMap">
+		select userNum, userName, replyText, rating, regDate, typeNum, productListNum, productName
+		from
+		(
+		select @rownum:=@rownum+1 as rownum, PR.*, PB.typeNum, PB.productName
+		from (select @rownum:=0) as rownum, productReply as PR
+		JOIN productBoard as PB
+		ON PR.productListNum = PB.productListNum
+		<choose>
+			<when test="productListNum != null">
+		where PR.productListNum = #{productListNum}
+			</when>
+			<!-- 본인이 작성한 상품평 가져오기(MyPageController) -->		
+			<when test="LoginUser != null">
+		where userNum = #{LoginUser.userNum}
+			</when>
+		</choose>
+		order by PR.regDate desc
+		) as A
+		<![CDATA[
+		where A.rownum > (#{Cri.pageNum}-1)*#{Cri.amount} and A.rownum <= #{Cri.pageNum}*#{Cri.amount};	
+		]]>
+	</select>
+	
+	<!-- 상품별 댓글 갯수 -->
+	<select id="replyCount" resultType="int">
+		select count(*) from productReply where productListNum = #{productListNum}
+	</select>
+	
+	<delete id="deleteReply">
+		delete from productReply where productListNum = #{productListNum} and userNum = #{userNum};
+	</delete>
 </mapper>

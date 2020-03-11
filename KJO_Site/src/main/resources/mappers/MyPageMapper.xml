@@ -71,4 +71,21 @@
 		from UserInfo
 		where userNum=#{userNum} and userPw=#{userPw};
 	</select>
+	
+	<!-- 본인이 작성한 상품평 가져오기 -->
+	<!-- <select id="myProductReply" resultType="java.util.LinkedHashMap">
+		select userName, replyText, rating, regDate, typeNum, productListNum, productName
+		from
+		(
+		select @rownum:=@rownum+1 as rownum, PR.*, PB.typeNum, PB.productName
+		from (select @rownum:=0) as rownum, productReply as PR
+		JOIN productBoard as PB
+		ON PR.productListNum = PB.productListNum
+		where userNum = #{LoginUser.userNum}
+		order by regDate desc
+		) as A
+		<![CDATA[
+		where A.rownum > (#{Cri.pageNum}-1)*#{Cri.amount} and A.rownum <= #{Cri.pageNum}*#{Cri.amount};
+		]]>
+	</select> -->
 </mapper>

@@ -129,6 +129,7 @@ public class shopCartController {
 		return result;
 	}
 	
+	//주문목록 추가
 	@RequestMapping(value="addOrder", method=RequestMethod.POST)
 	public void addOrderList(HttpServletRequest request, HttpServletResponse response
 			, @RequestParam(value="productListNum") int[] productListNum

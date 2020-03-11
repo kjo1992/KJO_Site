@@ -6,7 +6,7 @@ import java.util.Map;
 
 import com.KJO.model.Criteria;
 import com.KJO.model.ProductBoardVO;
-import com.KJO.model.ProductSpecVO;
+import com.KJO.model.productReplyVO;
 
 public interface ProductService {
 	//상품 타입코드 > 타입코드,이름
@@ -26,4 +26,20 @@ public interface ProductService {
 	
 	//상품 Detail
 	public Map<String, Object> productDetail(Map<String, String> map) throws Exception;
+	
+	//상품평 중복 체크
+	public int productReplyChk(productReplyVO PRV) throws Exception;
+	
+	//상품평 작성
+	public int addProductReply(productReplyVO PRV) throws Exception;
+	
+	//상품별 상품평 가져오기
+//	public List<productReplyVO> productReplyGet(Map<String, Object> criMap) throws Exception;
+	public List<Map> productReplyGet(Map<String, Object> map) throws Exception;
+	
+	//상품별 상품 댓글수
+	public int replyCount(int productListNum) throws Exception;
+	
+	//상품평 삭제
+	public int deleteReply(productReplyVO PRV) throws Exception;
 }

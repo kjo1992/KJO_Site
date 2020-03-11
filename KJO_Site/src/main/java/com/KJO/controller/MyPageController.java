@@ -28,6 +28,7 @@ import com.KJO.model.Criteria;
 import com.KJO.model.LoginVO;
 import com.KJO.model.UserVO;
 import com.KJO.service.MyPageService;
+import com.KJO.service.ProductService;
 import com.KJO.utils.CheckUtils;
 import com.KJO.utils.FileUploadUtils;
 
@@ -43,6 +44,8 @@ public class MyPageController {
 	
 	@Autowired
 	private MyPageService MPS;
+	@Autowired
+	private ProductService PS;
 	
 	CheckUtils PathCheck = new CheckUtils();
 	
@@ -63,6 +66,7 @@ public class MyPageController {
 		model.addAttribute("UserInfoGet", MPS.UserInfoGet(LoginUser));
 		model.addAttribute("FreeBoard", MPS.MyFBListGet(map));
 		model.addAttribute("orderList", MPS.myOrderList(LoginUser));
+		model.addAttribute("replyList", PS.productReplyGet(map));
 		return "MyPage/Main";
 	}
 	

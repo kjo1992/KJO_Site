@@ -63,6 +63,7 @@ public class BoardController {
 	@RequestMapping(value="List", method=RequestMethod.GET)
 	public String FreeBoardListGet(Model model, Criteria cri) throws Exception {
 		logger.info("ListPaging");
+		/* cri.setAmount(2); */
 		int total = BS.FreeBoardCount(cri);
 		PageVO PV = new PageVO(cri, total);
 		

@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.KJO.model.Criteria;
 import com.KJO.model.ProductBoardVO;
-import com.KJO.model.ProductSpecVO;
+import com.KJO.model.productReplyVO;
 
 @Repository
 public class ProductMapperImpl implements ProductMapper {
@@ -54,10 +54,40 @@ public class ProductMapperImpl implements ProductMapper {
 		SQL.insert(path+".productSpecInsert",map);
 	}
 
-	
 	//상품 Detail
 	@Override
 	public Map<String, Object> productDetail(Map<String, String> map) throws Exception {
 		return SQL.selectOne(path+".productDetail", map);
+	}
+	
+	//상품평 중복체크
+	@Override
+	public int productReplyChk(productReplyVO PRV) throws Exception {
+		return SQL.selectOne(path+".productReplyChk", PRV);
+	}
+	
+	//상품평 작성
+	@Override
+	public int addProductReply(productReplyVO PRV) throws Exception {
+		return SQL.insert(path+".addProductReply", PRV);
+	}
+	
+	//상품별 상품평 가져오기
+	@Override
+	public List<Map> productReplyGet(Map<String, Object> map) throws Exception {
+		List<Map> list = SQL.selectList(path+".productReplyGet", map);
+		return list;
+	}
+	
+	//상품별 댓글 수
+	@Override
+	public int replyCount(int productListNum) throws Exception {
+		return SQL.selectOne(path+".replyCount", productListNum);
+	}
+
+	@Override
+	public int deleteReply(productReplyVO PRV) throws Exception {
+		return SQL.delete(path+".deleteReply", PRV);
+		
 	}
 }

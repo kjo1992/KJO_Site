@@ -31,4 +31,7 @@ public interface MyPageMapper {
 	
 	//비밀번호 재확인
 	public int pwChk(Map<String, String> map) throws Exception;
+	
+	//내가 작성한 상품평 리스트
+	public List<Map> myProductReply(Map<String, Object> map) throws Exception;
 }
