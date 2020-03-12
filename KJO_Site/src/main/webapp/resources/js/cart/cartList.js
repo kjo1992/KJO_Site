@@ -118,7 +118,7 @@ $(document).ready(function(){
 			var SCV={};
 			SCV["cartNum"] = $(this).attr("data-cartNum");
 			SCV["amount"] = $(".changeAmount_"+$(this).attr("data-cartNum")).val();
-			alert(SCV.amount);
+			/*alert(SCV.amount);*/
 			console.log(SCV);
 			
 			$.ajax({

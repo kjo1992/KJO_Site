@@ -83,7 +83,7 @@ public class UserController {
 		logger.info("Logout Connect");
 		HttpSession session = request.getSession();
 		session.removeAttribute("LoginUser");
-		System.out.println("Session Clear");
+		logger.info("session clear");
 		
 		// 로그아웃한 페이지로 반환
 		response.sendRedirect(LoginCheck.PathChk(request, response));

@@ -87,7 +87,7 @@ $(document).ready(function() {
 		var ChkBtn = $(this).attr('id');
 		var ChkValue; var InputTagID;
 		var UrlPath = ContextPath+ChkBtn;
-		alert(UrlPath);
+		/*alert(UrlPath);*/
 		
 		//누른 버튼의 종류가 어떤거인지 확인하고, 해당하는 inputbox 값을 가져오기
 		if (ChkBtn == "NameChk") {

@@ -26,7 +26,7 @@
 			</td>
 			<td style="vertical-align: middle;">
 				<div>
-					<h6>제품명 : ${list.productName}</h6>
+					<h6>제품명 : <a href="${pageContext.request.contextPath}/Product/Detail?typeNum=${list.typeNum}&productName=${list.productName}&productListNum=${list.productListNum}"><b>${list.productName}</b></a></h6>
 					주문수량 : <fmt:formatNumber pattern="#,###" value="${list.amount}"></fmt:formatNumber>개<br/>
 					제품가격 : <fmt:formatNumber pattern="#,###" value="${list.productPrice}"></fmt:formatNumber>&nbsp;￦<br/>
 					최종가격 : <fmt:formatNumber pattern="#,###" value="${list.amount * list.productPrice}"></fmt:formatNumber>&nbsp;￦

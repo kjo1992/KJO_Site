@@ -1,5 +1,4 @@
 $(document).ready(function() {
-	alert('connect');
 	//정규표현식
 	var IDValueChk = RegExp(/^[a-zA-Z0-9]{5,15}$/);
 	var PWValueChk = RegExp(/^(?=.*[a-zA-z))(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,16}$/);

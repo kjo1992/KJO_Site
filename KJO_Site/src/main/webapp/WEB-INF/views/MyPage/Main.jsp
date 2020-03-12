@@ -69,7 +69,7 @@
 
 <div class="card mb-3">
 	<h5 class="card-header">내가 작성한 게시글<small>(최근5개)</small>
-	<small class="text-right float-right">전체보기</small>
+	<!-- <small class="text-right float-right">전체보기</small> -->
 	</h5>
 	<div class="card-body">
 		<table class="table table-hover" style="table-layout:fixed; word-break:break-all;">

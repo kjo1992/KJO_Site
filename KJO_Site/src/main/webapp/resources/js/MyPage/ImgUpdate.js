@@ -26,7 +26,7 @@ $(document).ready(function() {
 		if ($.inArray(imgType, ['png','jpeg','jpg','bmp']) != -1) {
 			// 선택된 이미지가 최대업로드 사이즈보다 작으면
 			if(imgSize < maxSize) {
-				alert("업로드 가능");
+				/*alert("업로드 가능");*/
 				$.ajax({
 					url:"imgChange",
 					data:formData,

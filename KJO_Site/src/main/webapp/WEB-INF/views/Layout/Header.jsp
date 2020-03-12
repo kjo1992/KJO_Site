@@ -72,7 +72,7 @@
       	<form action="${pageContext.request.contextPath}/User/Login" method="POST">
       		<div class="from-group"><input type="text" class="form-control" placeholder="ID" name="UserId"></div>
       		<div class="from-group"><input type="password" class="form-control my-sm-2" placeholder="PW" name="UserPw"></div>
-      		<small class="form-text text-muted my-sm-2">ID/PW가 기억나지 않으십니까?</small>
+      		<!-- <small class="form-text text-muted my-sm-2">ID/PW가 기억나지 않으십니까?</small> -->
       		<div class="from-group my-sm-2">
       		<input type="submit" value="로그인" class="btn btn-primary btn-sm my-2 my-sm-0">
       		<a href="${pageContext.request.contextPath}/User/AddUser"><input type="button" value="회원가입" class="btn btn-secondary btn-sm my-2 my-sm-0"></a>

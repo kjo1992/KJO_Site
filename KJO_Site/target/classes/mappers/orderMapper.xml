@@ -7,7 +7,7 @@
 		select 
 			OB.orderNum, OB.recipient, OB.recipientAdrress, OB.recipientContact, OB.totalPrice, OB.orderDate,
 		    OBD.productListNum, OBD.amount,
-		    PB.productName, PB.productPrice, PB.productImgPath_0
+		    PB.productName, PB.productPrice, PB.typeNum, PB.productImgPath_0
 		from orderBoard as OB
 		join orderBoardDetail as OBD
 		on OB.orderNum = OBD.orderNum

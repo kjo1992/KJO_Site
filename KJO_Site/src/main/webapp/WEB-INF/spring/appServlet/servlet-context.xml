@@ -37,6 +37,7 @@
 	
 	<beans:bean id="LoginChkInterceptor" class="com.KJO.interceptor.LoginChkInterceptor"></beans:bean>
 	<beans:bean id="MasterChkInterceptor" class="com.KJO.interceptor.MasterChkInterceptor"></beans:bean>
+	<beans:bean id="NotLoginChkInterceptor" class="com.KJO.interceptor.NotLoginChkInterceptor"></beans:bean>
 	<interceptors>
 		<interceptor>
 			<mapping path="/FreeBoard/WritePage"/>
@@ -55,6 +56,10 @@
 			<mapping path="/Product/AddProduct"/>
 			<mapping path="/Product/AddProduct/**"/>
 			<beans:ref bean="MasterChkInterceptor"/>
+		</interceptor>
+		<interceptor>
+			<mapping path="/User/AddUser"/>
+			<beans:ref bean="NotLoginChkInterceptor"/>
 		</interceptor>
 	</interceptors>
 	
