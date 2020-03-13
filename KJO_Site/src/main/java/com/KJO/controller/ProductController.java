@@ -137,7 +137,7 @@ public class ProductController {
 		
 		logger.info("map : "+map);
 		
-		return "redirect:/Product/Main";
+		return "redirect:/Main/HomePage";
 	}
 	
 	//모듈화된 input창 불러오는 Ajax

@@ -21,7 +21,7 @@ $(document).ready(function() {
 		var productListNum = $("#productListNum").val();
 //		var userNum = $("#userNum").val();
 		var amount = $("#amount").val();
-		alert("productListNum : "+productListNum+"/ amount : "+amount);
+		/*alert("productListNum : "+productListNum+"/ amount : "+amount);*/
 		var data = {
 			productListNum : productListNum,
 			/*userNum : userNum,*/
@@ -38,7 +38,7 @@ $(document).ready(function() {
 				data : data,
 				success : function(result){
 					if(result == 1) {
-						alert("카트 담기 성공");
+						alert("장바구니에 성공적으로 추가되었습니다.");
 						console.log(result);
 						$("#amount").val("1");
 					} else {

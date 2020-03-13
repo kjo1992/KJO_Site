@@ -26,7 +26,7 @@
 	  <td><img src="${list.productImgPath_0}" width="150px" height="150px"></td>
       <td><a href="${pageContext.request.contextPath}/Product/Detail?typeNum=${list.typeNum}&productName=${list.productName}&productListNum=${list.productListNum}"><b>${list.productName}</b></a><br/>
       	<div style="vertical-align:middle;">
-      		<JSTL:forEach items="${list}" var="spec" varStatus="status" begin="6">
+      		<JSTL:forEach items="${list}" var="spec" varStatus="status" begin="7">
       			<JSTL:choose>
       				<JSTL:when test="${status.last}">
       					${spec.value}

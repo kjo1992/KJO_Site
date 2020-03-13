@@ -35,7 +35,7 @@
 		( 
 			select @rownum:=@rownum+1 as rownum, PL.*, avgRat.rating
 			from (select @rownum:=0) as rownum, productBoard as PL
-			JOIN (select productListNum, avg(rating) as rating from productReply group by productListNum) as avgRat
+			LEFT OUTER JOIN (select productListNum, avg(rating) as rating from productReply group by productListNum) as avgRat
 			ON PL.productListNum = avgRat.productListNum
 			<if test="typeNum != null">
 			where PL.typeNum = #{typeNum}	

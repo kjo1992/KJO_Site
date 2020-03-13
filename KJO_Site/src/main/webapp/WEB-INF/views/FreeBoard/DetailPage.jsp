@@ -33,7 +33,7 @@
 			    <form class="float-left" action="${pageContext.request.contextPath}/FreeBoard/UpdatePage?bnum=${FBDetail.boardNum}&unum=${FBDetail.writerNum}" method="post" id="UpdateForm">
 			    	<button type="submit" class="btn btn-link" id="UpdateBtn">수정</button>
 				</form>
-				<form class="float-right" action="${pageContext.request.contextPath}/FreeBoard/Delete?bnum=${FBDetail.boardNum}&unum=${FBDetail.writerNum}" method="post" id="DeleteForm" onsubmit="return false">
+				<form class="float-right" action="${pageContext.request.contextPath}/FreeBoard/Delete?bnum=${FBDetail.boardNum}&unum=${FBDetail.writerNum}" method="post" id="DeleteForm">
 					<button type="submit" class="btn btn-link" id="DeleteBtn">삭제</button>
 				</form>
 				</div>

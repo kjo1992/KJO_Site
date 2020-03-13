@@ -35,7 +35,7 @@ $(document).ready(function() {
 					contentType:false,
 					type:'POST',
 					success:function(data) {
-						alert('업로드 성공');
+						alert('변경 성공');
 						$("#profileImg").attr("src", data);
 						$("#thumnail").attr("src", data);
 						console.log("return : "+data);

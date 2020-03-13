@@ -30,7 +30,7 @@ $(document).ready(function(){
 	});
 	
 	$("#DeleteBtn").on("click", function(){
-		var check=confirm("회원탈퇴시 기존에 작성한 게시글 및 댓글은 삭제, 수정이 불가능합니다." +
+		var check=confirm("회원탈퇴시 기존에 작성한 게시글 및 댓글, 상품평, 장바구니, 주문목록은 삭제 됩니다." +
 				" 그래도 탈퇴하시겠습니까?");
 		
 		if (check) {
