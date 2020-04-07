@@ -114,7 +114,7 @@ public class UserController {
 		int result = 0;
 		try {
 			result = US.NameChk(ChkValue);
-			System.out.println("NameChk result : " + result);
+			logger.info("NameChk result : " + result);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -128,7 +128,7 @@ public class UserController {
 		int result = 0;
 		try {
 			result = US.EmailChk(ChkValue);
-			System.out.println("EmailChk result : " + result);
+			logger.info("EmailChk result : " + result);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

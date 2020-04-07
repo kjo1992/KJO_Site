@@ -67,6 +67,33 @@
   </div>
 </div>
 
+<div class="modal mt-5" id="pwCheckModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">비밀번호 재확인</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<%-- <form action="${pageContext.request.contextPath}/MyPage/pwChk" method="POST">
+      		보안을 위하여 비밀번호를 다시 한번 입력해주세요<br/>
+      		<div class="from-group"><input type="password" class="form-control my-sm-2" placeholder="PW" name="inputPw"></div>
+      		<div class="from-group my-sm-2">
+      		<input type="button" id="" value="확인" class="btn btn-primary btn-sm my-2 my-sm-0">
+      		</div>
+      	</form> --%>
+      	보안을 위하여 비밀번호를 다시 한번 입력해주세요<br/>
+      	<div class="from-group"><input type="password" class="form-control my-sm-2" placeholder="PW" id="inputPw"></div>
+      	<div class="from-group my-sm-2">
+      	<input type="button" id="pwCheckBtn" value="확인" class="btn btn-primary btn-sm my-2 my-sm-0">
+      	</div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="card mb-3">
 	<h5 class="card-header">내가 작성한 게시글<small>(최근5개)</small>
 	<!-- <small class="text-right float-right">전체보기</small> -->
